@@ -15,6 +15,7 @@ public class Content extends Node {
     // ================ Constants =========================================== //
 
     // ================ Members ============================================= //
+    @Index
     private String title;
     @Index
     private Date date;
@@ -27,10 +28,11 @@ public class Content extends Node {
     private SourceType sourceType;
     @Index
     private Category category;
+    @Index
+    protected String type = "Content";
 
     // ================ Constructors & Main ================================= //
     public Content() {
-
     }
 
     public Content(String title, Date date, String content, Creator creator, SourceEnum source, SourceType sourceType, Category category) {

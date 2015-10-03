@@ -1,21 +1,31 @@
-package com.crowdappz.pig.model;
+package com.crowdappz.pig.model.node;
 
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
+import com.crowdappz.pig.model.Node;
 import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.Subclass;
 
 
-@Entity
-public class Node {
+@Subclass(index = true)
+public class Person extends Node {
+
     // ================ Constants =========================================== //
 
     // ================ Members ============================================= //
-    @Id
-    protected Long id;
     @Index
-    protected String type;
-    // ================ Constructors & Main ================================= //
+    private String firstName;
+    @Index
+    private String lastName;
+    @Index
+    protected String type = "Person";
 
+    // ================ Constructors & Main ================================= //
+    public Person() {
+    }
+
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
     // ================ Methods for/from SuperClass / Interfaces ============ //
 
     // ================ Public Methods ====================================== //
@@ -24,20 +34,20 @@ public class Node {
 
     // ================ Getter & Setter ===================================== //
 
-    public Long getId() {
-        return id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getType() {
-        return type;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     // ================ Builder Pattern ===================================== //

@@ -1,8 +1,9 @@
 package com.crowdappz.pig.main;
 
 import com.crowdappz.pig.handler.QueryHandler;
-import com.crowdappz.pig.model.others.Category;
 import com.crowdappz.pig.model.node.Content;
+import com.crowdappz.pig.model.node.Creator;
+import com.crowdappz.pig.model.others.Category;
 import com.crowdappz.pig.model.others.SourceEnum;
 import com.crowdappz.pig.model.others.SourceType;
 
@@ -16,14 +17,25 @@ public class DataProvider {
 
     // ================ Members ============================================= //
     private static List<Content> contents = new ArrayList<>();
+
+    private static List<Creator> creators = new ArrayList<Creator>() {{
+        add(new Creator("Clark", "Gable"));
+    }};
     // ================ Constructors & Main ================================= //
 
     // ================ Methods for/from SuperClass / Interfaces ============ //
 
     // ================ Public Methods ====================================== //
-    public void generateContent() {
+    public static List<Content> createAndGetContents() {
+        generateContent();
+        saveContent();
+        return contents;
+    }
+
+    // ================ Private Methods ===================================== //
+    private static void generateContent() {
         contents.add(new Content()
-                .withAuthor("Clark Gable")
+                .withAuthor(creators.get(0))
                 .withCategory(Category.BUSINESS)
                 .withDate(new Date())
                 .withTitle("From Zero to Hero on 1 weekend")
@@ -32,7 +44,7 @@ public class DataProvider {
                 .withSourceType(SourceType.NEWS));
 
         contents.add(new Content()
-                .withAuthor("Clark Gable")
+                .withAuthor(creators.get(0))
                 .withCategory(Category.BUSINESS)
                 .withDate(new Date())
                 .withTitle("From Zero to Hero on 1 weekend")
@@ -41,7 +53,7 @@ public class DataProvider {
                 .withSourceType(SourceType.NEWS));
 
         contents.add(new Content()
-                .withAuthor("Clark Gable")
+                .withAuthor(creators.get(0))
                 .withCategory(Category.BUSINESS)
                 .withDate(new Date())
                 .withTitle("From Zero to Hero on 1 weekend")
@@ -50,7 +62,7 @@ public class DataProvider {
                 .withSourceType(SourceType.NEWS));
 
         contents.add(new Content()
-                .withAuthor("Clark Gable")
+                .withAuthor(creators.get(0))
                 .withCategory(Category.BUSINESS)
                 .withDate(new Date())
                 .withTitle("From Zero to Hero on 1 weekend")
@@ -59,7 +71,7 @@ public class DataProvider {
                 .withSourceType(SourceType.NEWS));
 
         contents.add(new Content()
-                .withAuthor("Clark Gable")
+                .withAuthor(creators.get(0))
                 .withCategory(Category.BUSINESS)
                 .withDate(new Date())
                 .withTitle("From Zero to Hero on 1 weekend")
@@ -68,12 +80,11 @@ public class DataProvider {
                 .withSourceType(SourceType.NEWS));
     }
 
-    public void saveContent() {
+    private static void saveContent() {
         for (Content content : contents) {
             QueryHandler.ofy().save().entity(content).now();
         }
     }
-    // ================ Private Methods ===================================== //
 
     // ================ Getter & Setter ===================================== //
     public static List<Content> getContents() {

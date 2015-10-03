@@ -2,6 +2,7 @@ package com.crowdappz.pig.model;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
 import java.util.Date;
 
@@ -13,8 +14,11 @@ public class Edge {
     // ================ Members ============================================= //
     @Id
     private Long id;
+    @Index
     private Long fromNodeId;
+    @Index
     private Long toNodeId;
+    @Index
     private Date createdAt;
 
     // ================ Constructors & Main ================================= //

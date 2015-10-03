@@ -1,20 +1,15 @@
-package com.crowdappz.pig.model;
+package com.crowdappz.pig.wrapper;
 
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Index;
-
-
-@Entity
-public class Node {
+public class LongWrapper {
     // ================ Constants =========================================== //
 
     // ================ Members ============================================= //
-    @Id
-    protected Long id;
-    @Index
-    protected String type;
+    private Long l;
     // ================ Constructors & Main ================================= //
+
+    public LongWrapper(Long l) {
+        this.l = l;
+    }
 
     // ================ Methods for/from SuperClass / Interfaces ============ //
 
@@ -24,20 +19,12 @@ public class Node {
 
     // ================ Getter & Setter ===================================== //
 
-    public Long getId() {
-        return id;
+    public Long getL() {
+        return l;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public void setL(Long l) {
+        this.l = l;
     }
 
     // ================ Builder Pattern ===================================== //

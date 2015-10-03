@@ -1,21 +1,22 @@
 package com.crowdappz.pig.model.node;
 
-import com.crowdappz.pig.model.Node;
+import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Subclass;
 
 
 @Subclass(index = true)
-public class Creator extends Node {
+public class Creator extends Person {
     // ================ Constants =========================================== //
 
     // ================ Members ============================================= //
-    private String firstName;
-    private String lastName;
+    @Index
+    protected String type = "Creator";
     // ================ Constructors & Main ================================= //
+    public Creator() {
+    }
 
     public Creator(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        super(firstName, lastName);
     }
     // ================ Methods for/from SuperClass / Interfaces ============ //
 
@@ -24,22 +25,6 @@ public class Creator extends Node {
     // ================ Private Methods ===================================== //
 
     // ================ Getter & Setter ===================================== //
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     // ================ Builder Pattern ===================================== //
 

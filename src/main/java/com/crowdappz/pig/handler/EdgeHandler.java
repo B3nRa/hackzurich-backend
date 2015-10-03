@@ -1,19 +1,21 @@
-package com.crowdappz.pig.model;
+package com.crowdappz.pig.handler;
 
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Index;
+import com.crowdappz.pig.model.Edge;
+
+import java.util.Date;
 
 
-@Entity
-public class Node {
+public class EdgeHandler {
     // ================ Constants =========================================== //
 
     // ================ Members ============================================= //
-    @Id
-    protected Long id;
-    @Index
-    protected String type;
+    public static void createEdgeBetweenNodes(Long fromNode, Long toNode) {
+        createEdgeBetweenNodes(fromNode, toNode, new Date());
+    }
+
+    public static void createEdgeBetweenNodes(Long fromNode, Long toNode, Date date) {
+        Edge e = new Edge(fromNode, toNode, date);
+    }
     // ================ Constructors & Main ================================= //
 
     // ================ Methods for/from SuperClass / Interfaces ============ //
@@ -23,22 +25,6 @@ public class Node {
     // ================ Private Methods ===================================== //
 
     // ================ Getter & Setter ===================================== //
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     // ================ Builder Pattern ===================================== //
 
