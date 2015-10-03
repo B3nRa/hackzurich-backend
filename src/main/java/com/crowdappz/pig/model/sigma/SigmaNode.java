@@ -1,23 +1,21 @@
-package com.crowdappz.pig.handler;
+package com.crowdappz.pig.model.sigma;
 
-import com.crowdappz.pig.model.Edge;
-
-import java.util.Date;
-
-
-public class EdgeHandler {
+public class SigmaNode {
     // ================ Constants =========================================== //
 
     // ================ Members ============================================= //
-    public static Long createEdgeBetweenNodes(Long fromNode, Long toNode, String type) {
-        return createEdgeBetweenNodes(fromNode, toNode, type, new Date());
+    private String id;
+    private String label;
+
+    // ================ Constructors & Main ================================= //
+    public SigmaNode(Long id, String label) {
+        this(String.valueOf(id), label);
     }
 
-    public static Long createEdgeBetweenNodes(Long fromNode, Long toNode, String type, Date date) {
-        Edge e = new Edge(fromNode, toNode, type, date);
-        return QueryHandler.saveEdge(e);
+    public SigmaNode(String id, String label) {
+        this.id = id;
+        this.label = label;
     }
-    // ================ Constructors & Main ================================= //
 
     // ================ Methods for/from SuperClass / Interfaces ============ //
 
@@ -26,6 +24,22 @@ public class EdgeHandler {
     // ================ Private Methods ===================================== //
 
     // ================ Getter & Setter ===================================== //
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
     // ================ Builder Pattern ===================================== //
 

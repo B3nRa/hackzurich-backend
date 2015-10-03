@@ -1,22 +1,23 @@
-package com.crowdappz.pig.model;
+package com.crowdappz.pig.model.sigma;
 
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Index;
-
-
-@Entity
-public class Node {
+public class SigmaEdge {
     // ================ Constants =========================================== //
 
     // ================ Members ============================================= //
-    @Id
-    protected Long id;
-    @Index
-    protected String type;
-    @Index
-    protected String label;
+    private String id;
+    private String source;
+    private String target;
     // ================ Constructors & Main ================================= //
+
+    public SigmaEdge(Long id, Long source, Long target) {
+        this(String.valueOf(id), String.valueOf(source), String.valueOf(target));
+    }
+
+    public SigmaEdge(String id, String source, String target) {
+        this.id = id;
+        this.source = source;
+        this.target = target;
+    }
 
     // ================ Methods for/from SuperClass / Interfaces ============ //
 
@@ -26,28 +27,28 @@ public class Node {
 
     // ================ Getter & Setter ===================================== //
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getSource() {
+        return source;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setSource(String source) {
+        this.source = source;
     }
 
-    public String getLabel() {
-        return label;
+    public String getTarget() {
+        return target;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setTarget(String target) {
+        this.target = target;
     }
 
     // ================ Builder Pattern ===================================== //

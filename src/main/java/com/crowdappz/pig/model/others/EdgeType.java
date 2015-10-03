@@ -1,22 +1,12 @@
-package com.crowdappz.pig.handler;
+package com.crowdappz.pig.model.others;
 
-import com.crowdappz.pig.model.Edge;
+public class EdgeType {
 
-import java.util.Date;
-
-
-public class EdgeHandler {
     // ================ Constants =========================================== //
-
+    public static final String IS_CREATOR_OF = "is_creator_of";
+    public static final String IS_LIKER_OF = "is_liker_of";
     // ================ Members ============================================= //
-    public static Long createEdgeBetweenNodes(Long fromNode, Long toNode, String type) {
-        return createEdgeBetweenNodes(fromNode, toNode, type, new Date());
-    }
 
-    public static Long createEdgeBetweenNodes(Long fromNode, Long toNode, String type, Date date) {
-        Edge e = new Edge(fromNode, toNode, type, date);
-        return QueryHandler.saveEdge(e);
-    }
     // ================ Constructors & Main ================================= //
 
     // ================ Methods for/from SuperClass / Interfaces ============ //

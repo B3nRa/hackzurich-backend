@@ -3,6 +3,7 @@ package com.crowdappz.pig.model.node;
 import com.crowdappz.pig.handler.QueryHandler;
 import com.crowdappz.pig.model.Edge;
 import com.crowdappz.pig.model.Node;
+import com.crowdappz.pig.model.others.EdgeType;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Subclass;
 
@@ -39,6 +40,8 @@ public class Content extends Node {
         this.source = source;
         this.sourceType = sourceType;
         this.category = category;
+
+        this.label = title;
     }
     // ================ Methods for/from SuperClass / Interfaces ============ //
 
@@ -53,6 +56,7 @@ public class Content extends Node {
 
     public void setTitle(String title) {
         this.title = title;
+        this.label = title;
     }
 
     public Date getDate() {
@@ -105,7 +109,7 @@ public class Content extends Node {
 
     // ================ Builder Pattern ===================================== //
     public Content withTitle(String title) {
-        this.title = title;
+        this.setTitle(title);
         return this;
     }
 
@@ -115,7 +119,8 @@ public class Content extends Node {
     }
 
     public Content withCreator(Long creator, Date date) {
-        Edge e = new Edge(this.id, creator, date);
+        // this.id is null here because node is not saved yet
+        Edge e = new Edge(this.id, creator, EdgeType.IS_CREATOR_OF, date);
         QueryHandler.saveEdge(e);
         return this;
     }

@@ -25,6 +25,7 @@ public class Person extends Node {
     public Person(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.label = firstName + " " + lastName;
     }
     // ================ Methods for/from SuperClass / Interfaces ============ //
 

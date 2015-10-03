@@ -5,6 +5,7 @@ import com.crowdappz.pig.model.Node;
 import com.crowdappz.pig.model.node.Content;
 import com.crowdappz.pig.model.node.Creator;
 import com.crowdappz.pig.model.node.User;
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 
@@ -40,6 +41,18 @@ public class QueryHandler {
     public static Long saveEdge(Edge e) {
         ofy().save().entity(e).now();
         return e.getId();
+    }
+
+    public static <T> List<T> fetchEntries(Class<T> clazz) {
+        return ofy().load().type(clazz).list();
+    }
+
+    public static <T> T loadById(Class<T> clazz, Long id) {
+        return ofy().load().key(Key.create(clazz, id)).now();
+    }
+
+    public static <T> List<T> fetchEntriesWithFilter(Class<T> clazz, String filterKey, Object filterValue) {
+        return ofy().load().type(clazz).filter(filterKey, filterValue).list();
     }
 
     public static List<User> getAllUsers() {

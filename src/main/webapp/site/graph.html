@@ -4,11 +4,42 @@
     <meta charset="UTF-8">
     <title>Personal Interest Graph</title>
 
+    <link rel="stylesheet" href="css/style-graph.css" />
+
     <script type="text/javascript" src="libs/sigma.min.js"></script>
     <script type="text/javascript" src="libs/sigma.parsers.gexf.min.js"></script>
     <script type="text/javascript" src="libs/sigma.layout.forceAtlas2.min.js"></script>
+    <script type="text/javascript" src="libs/sigma.parsers.json.js"></script>
+    <script type="text/javascript" src="communicator.js"></script>
+    <script type="text/javascript" src="graphmanager.js"></script>
+    <script type="text/javascript" src="nodemanager.js"></script>
+    <script type="text/javascript" src="edgemanager.js"></script>
 </head>
 <body>
     <div id="sigma-container"></div>
+
+    <script>
+        window.onload = function(){
+            // graphmanager.initSigma();
+            // stopLayoutTrigger();
+            //
+            //
+
+            communicator.getSigmaGraphOfUser("5147289865682944", graphDataCb);
+            function graphDataCb(data){
+                console.log(data);
+                graphmanager.initSigma(data);
+                stopLayoutTrigger();
+            }
+
+            function stopLayoutTrigger(){
+                setTimeout(function(){
+                    console.log("timeout over: stopLayout");
+                    graphmanager.stopLayout();
+                }, 2000)
+            }
+        };
+
+    </script>
 </body>
 </html>

@@ -1,9 +1,11 @@
 package com.crowdappz.pig.main;
 
+import com.crowdappz.pig.handler.EdgeHandler;
 import com.crowdappz.pig.handler.QueryHandler;
 import com.crowdappz.pig.model.node.Content;
 import com.crowdappz.pig.model.node.Creator;
 import com.crowdappz.pig.model.others.Category;
+import com.crowdappz.pig.model.others.EdgeType;
 import com.crowdappz.pig.model.others.SourceEnum;
 import com.crowdappz.pig.model.others.SourceType;
 
@@ -32,68 +34,66 @@ public class DataProvider {
     public static List<Content> createAndGetContents() {
         saveCreators();
         generateContent();
-        saveContent();
         return contents;
     }
 
     // ================ Private Methods ===================================== //
     private static void generateContent() {
-        contents.add(new Content()
-                .withCreator(creators.get(0).getId(), new Date())
+        Content c = new Content()
                 .withCategory(Category.BUSINESS)
                 .withDate(new Date())
                 .withTitle("From Zero to Hero on 1 weekend")
                 .withContent("Foobar")
                 .withSource(SourceEnum.BUSINESS_INSIDER)
-                .withSourceType(SourceType.NEWS));
+                .withSourceType(SourceType.NEWS);
+        QueryHandler.saveNode(c);
+        EdgeHandler.createEdgeBetweenNodes(creators.get(0).getId(), c.getId(), EdgeType.IS_CREATOR_OF);
 
-        contents.add(new Content()
-                .withCreator(creators.get(1).getId(), new Date())
+        c = new Content()
                 .withCategory(Category.TECH)
                 .withDate(new Date())
                 .withTitle("Launched new space X rocket")
                 .withContent(
                         "Model X Bioweapon Defense Mode definitely filters viruses btw, even the small ones. Has hospital operating room level filtering.")
                 .withSource(SourceEnum.TWITTER)
-                .withSourceType(SourceType.SOCIAL_MEDIA));
+                .withSourceType(SourceType.SOCIAL_MEDIA);
+        QueryHandler.saveNode(c);
+        EdgeHandler.createEdgeBetweenNodes(creators.get(1).getId(), c.getId(), EdgeType.IS_CREATOR_OF);
 
-        contents.add(new Content()
-                .withCreator(creators.get(2).getId(), new Date())
+        c = new Content()
                 .withCategory(Category.BUSINESS)
                 .withDate(new Date())
                 .withTitle("How to scale your startup")
                 .withContent("Foobar")
                 .withSource(SourceEnum.OTHERS)
-                .withSourceType(SourceType.BLOG));
+                .withSourceType(SourceType.BLOG);
+        QueryHandler.saveNode(c);
+        EdgeHandler.createEdgeBetweenNodes(creators.get(3).getId(), c.getId(), EdgeType.IS_CREATOR_OF);
 
-        contents.add(new Content()
-                .withCreator(creators.get(0).getId(), new Date())
+        c = new Content()
                 .withCategory(Category.BUSINESS)
                 .withDate(new Date())
                 .withTitle("From Zero to Hero on 1 weekend")
                 .withContent("Foobar")
                 .withSource(SourceEnum.BUSINESS_INSIDER)
-                .withSourceType(SourceType.NEWS));
+                .withSourceType(SourceType.NEWS);
+        QueryHandler.saveNode(c);
+        EdgeHandler.createEdgeBetweenNodes(creators.get(3).getId(), c.getId(), EdgeType.IS_CREATOR_OF);
 
-        contents.add(new Content()
-                .withCreator(creators.get(1).getId(), new Date())
+        c = new Content()
                 .withCategory(Category.BUSINESS)
                 .withDate(new Date())
                 .withTitle("From Zero to Hero on 1 weekend")
                 .withContent("Foobar")
                 .withSource(SourceEnum.BUSINESS_INSIDER)
-                .withSourceType(SourceType.NEWS));
+                .withSourceType(SourceType.NEWS);
+        QueryHandler.saveNode(c);
+        EdgeHandler.createEdgeBetweenNodes(creators.get(2).getId(), c.getId(), EdgeType.IS_CREATOR_OF);
     }
 
     private static void saveCreators() {
         for (Creator c : creators) {
             QueryHandler.saveNode(c);
-        }
-    }
-
-    private static void saveContent() {
-        for (Content content : contents) {
-            QueryHandler.saveNode(content);
         }
     }
 

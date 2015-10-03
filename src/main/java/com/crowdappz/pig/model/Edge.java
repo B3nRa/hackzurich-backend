@@ -20,11 +20,18 @@ public class Edge {
     private Long toNodeId;
     @Index
     private Date createdAt;
+    @Index
+    private String type;
 
     // ================ Constructors & Main ================================= //
-    public Edge(Long fromNodeId, Long toNodeId, Date createdAt) {
+    public Edge() {
+
+    }
+
+    public Edge(Long fromNodeId, Long toNodeId, String type, Date createdAt) {
         this.fromNodeId = fromNodeId;
         this.toNodeId = toNodeId;
+        this.type = type;
         this.createdAt = createdAt;
     }
     // ================ Methods for/from SuperClass / Interfaces ============ //

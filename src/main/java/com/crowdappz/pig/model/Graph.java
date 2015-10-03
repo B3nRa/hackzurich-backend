@@ -1,23 +1,20 @@
-package com.crowdappz.pig.handler;
+package com.crowdappz.pig.model;
 
-import com.crowdappz.pig.model.Edge;
-
-import java.util.Date;
+import java.util.List;
 
 
-public class EdgeHandler {
+public class Graph {
     // ================ Constants =========================================== //
 
     // ================ Members ============================================= //
-    public static Long createEdgeBetweenNodes(Long fromNode, Long toNode, String type) {
-        return createEdgeBetweenNodes(fromNode, toNode, type, new Date());
-    }
-
-    public static Long createEdgeBetweenNodes(Long fromNode, Long toNode, String type, Date date) {
-        Edge e = new Edge(fromNode, toNode, type, date);
-        return QueryHandler.saveEdge(e);
-    }
+    private List<Node> nodes;
+    private List<Edge> edges;
     // ================ Constructors & Main ================================= //
+
+    public Graph(List<Node> nodes, List<Edge> edges) {
+        this.nodes = nodes;
+        this.edges = edges;
+    }
 
     // ================ Methods for/from SuperClass / Interfaces ============ //
 
@@ -26,6 +23,22 @@ public class EdgeHandler {
     // ================ Private Methods ===================================== //
 
     // ================ Getter & Setter ===================================== //
+
+    public List<Node> getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(List<Node> nodes) {
+        this.nodes = nodes;
+    }
+
+    public List<Edge> getEdges() {
+        return edges;
+    }
+
+    public void setEdges(List<Edge> edges) {
+        this.edges = edges;
+    }
 
     // ================ Builder Pattern ===================================== //
 
