@@ -18,10 +18,10 @@ import java.util.List;
         version = "v0")
 public class ContentEndpoint {
 
-    @ApiMethod(path = "createUser",
+    @ApiMethod(path = "saveNode",
             httpMethod = ApiMethod.HttpMethod.PUT)
     public LongWrapper createUser(@Named("firstName") String firstName, @Named("lastName") String lastName) {
-        return new LongWrapper(QueryHandler.createUser(firstName, lastName));
+        return new LongWrapper(QueryHandler.saveNode(new User(firstName, lastName)));
     }
 
     @ApiMethod(path = "getAllUsers",
@@ -38,7 +38,7 @@ public class ContentEndpoint {
 
     @ApiMethod(path = "likeContent",
             httpMethod = ApiMethod.HttpMethod.PUT)
-    public void likeContent(@Named("userId") Long userId, @Named("contentId") Long contentId) {
-        EdgeHandler.createEdgeBetweenNodes(userId, contentId);
+    public LongWrapper likeContent(@Named("userId") Long userId, @Named("contentId") Long contentId) {
+        return new LongWrapper(EdgeHandler.createEdgeBetweenNodes(userId, contentId));
     }
 }

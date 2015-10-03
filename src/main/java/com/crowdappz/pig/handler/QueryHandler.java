@@ -32,13 +32,17 @@ public class QueryHandler {
         return ObjectifyService.ofy();
     }
 
-    public static Long createUser(String firstName, String lastName) {
-        User u = new User(firstName, lastName);
-        ofy().save().entity(u).now();
-        return u.getId();
+    public static Long saveNode(Node n) {
+        ofy().save().entity(n).now();
+        return n.getId();
     }
 
-    public static List<User> getAllUsers(){
+    public static Long saveEdge(Edge e) {
+        ofy().save().entity(e).now();
+        return e.getId();
+    }
+
+    public static List<User> getAllUsers() {
         return ofy().load().type(User.class).list();
     }
     // ================ Public Methods ====================================== //

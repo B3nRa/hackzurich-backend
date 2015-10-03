@@ -9,12 +9,13 @@ public class EdgeHandler {
     // ================ Constants =========================================== //
 
     // ================ Members ============================================= //
-    public static void createEdgeBetweenNodes(Long fromNode, Long toNode) {
-        createEdgeBetweenNodes(fromNode, toNode, new Date());
+    public static Long createEdgeBetweenNodes(Long fromNode, Long toNode) {
+        return createEdgeBetweenNodes(fromNode, toNode, new Date());
     }
 
-    public static void createEdgeBetweenNodes(Long fromNode, Long toNode, Date date) {
+    public static Long createEdgeBetweenNodes(Long fromNode, Long toNode, Date date) {
         Edge e = new Edge(fromNode, toNode, date);
+        return QueryHandler.saveEdge(e);
     }
     // ================ Constructors & Main ================================= //
 

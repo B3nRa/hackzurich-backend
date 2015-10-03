@@ -1,9 +1,8 @@
 package com.crowdappz.pig.model.node;
 
-import com.crowdappz.pig.model.others.Category;
+import com.crowdappz.pig.handler.QueryHandler;
+import com.crowdappz.pig.model.Edge;
 import com.crowdappz.pig.model.Node;
-import com.crowdappz.pig.model.others.SourceEnum;
-import com.crowdappz.pig.model.others.SourceType;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Subclass;
 
@@ -21,13 +20,11 @@ public class Content extends Node {
     private Date date;
     private String content;
     @Index
-    private Creator creator;
+    private String source;
     @Index
-    private SourceEnum source;
+    private String sourceType;
     @Index
-    private SourceType sourceType;
-    @Index
-    private Category category;
+    private String category;
     @Index
     protected String type = "Content";
 
@@ -35,11 +32,10 @@ public class Content extends Node {
     public Content() {
     }
 
-    public Content(String title, Date date, String content, Creator creator, SourceEnum source, SourceType sourceType, Category category) {
+    public Content(String title, Date date, String content, String source, String sourceType, String category) {
         this.title = title;
         this.date = date;
         this.content = content;
-        this.creator = creator;
         this.source = source;
         this.sourceType = sourceType;
         this.category = category;
@@ -75,27 +71,19 @@ public class Content extends Node {
         this.content = content;
     }
 
-    public Creator getCreator() {
-        return creator;
-    }
-
-    public void setCreator(Creator creator) {
-        this.creator = creator;
-    }
-
-    public SourceEnum getSource() {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(SourceEnum source) {
+    public void setSource(String source) {
         this.source = source;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -107,11 +95,11 @@ public class Content extends Node {
         this.id = id;
     }
 
-    public SourceType getSourceType() {
+    public String getSourceType() {
         return sourceType;
     }
 
-    public void setSourceType(SourceType sourceType) {
+    public void setSourceType(String sourceType) {
         this.sourceType = sourceType;
     }
 
@@ -126,22 +114,23 @@ public class Content extends Node {
         return this;
     }
 
-    public Content withAuthor(Creator author) {
-        this.creator = author;
+    public Content withCreator(Long creator, Date date) {
+        Edge e = new Edge(this.id, creator, date);
+        QueryHandler.saveEdge(e);
         return this;
     }
 
-    public Content withSource(SourceEnum source) {
+    public Content withSource(String source) {
         this.source = source;
         return this;
     }
 
-    public Content withCategory(Category category) {
+    public Content withCategory(String category) {
         this.category = category;
         return this;
     }
 
-    public Content withSourceType(SourceType sourceType) {
+    public Content withSourceType(String sourceType) {
         this.sourceType = sourceType;
         return this;
     }
